@@ -19,12 +19,29 @@ on:
 ### Add a step 
 ```yaml
 - name: Get azdo wi link step
-        uses: solidify/github-action-azdo-link@master
+  uses: solidify/github-action-azdo-link@master
         with:
           organization: 'Org Name'
           projectName: 'Team Project Name'
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-``` 
+```
+
+### Only get link in output do not place comment
+```yaml
+- name: Get azdo wi link step
+  id: 
+  uses: solidify/github-action-azdo-link@master
+  with:
+          output_only: true
+          organization: 'Org Name'          
+          projectName: 'Team Project Name'
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+- name: message
+  uses: thollander/actions-comment-pull-request@v3
+      with:
+        message: Cannot approve this PR if the website is not built or no devops item is linked.
+```
+
 
 ## License
 The scripts and documentation in this project are released under the [MIT License](LICENSE)
