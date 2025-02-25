@@ -13,6 +13,10 @@ inputs:
     description: "Azure DevOps Project name"
     required: true
     default: ""
+  outputOnly: 
+    description: "Set link in output, do not write comment"
+    required: false
+    default: false
 outputs:
   workItemLink: # id of output
     description: "The link to the Azure Boards work item"

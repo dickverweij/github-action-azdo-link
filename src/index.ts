@@ -17,31 +17,37 @@ const main = async () => {
     const organization = core.getInput("organization");
     const project = core.getInput("projectName");
     const workItemLinkRegEx = /AB#(?<wiId>\d+)/g;
-
+    const outputOnly = core.getBooleanInput("outputOnly");
     const titleMatch = workItemLinkRegEx.exec(github.context.payload.pull_request.title);
     const descriptionMatch = workItemLinkRegEx.exec(github.context.payload.pull_request.body);
     console.log(titleMatch, descriptionMatch);
     console.log('Title has work item:', workItemLinkRegEx.test(github.context.payload.pull_request ? github.context.payload.pull_request.title : ""))
     console.log('Description has work item:', workItemLinkRegEx.test(github.context.payload.pull_request ? github.context.payload.pull_request.body : ""))
 
+    let link: String | null = null;
+
+
     if (titleMatch && titleMatch?.groups?.wiId) {
-      const octokit = new github.GitHub(github_token);
-      octokit.issues.createComment({
-        ...context.repo,
-        issue_number: pull_request_number,
-        body: makeLink(organization, project, titleMatch?.groups?.wiId)
-      });
+      link = makeLink(organization, project, titleMatch?.groups?.wiId);
     }
-
     else if (descriptionMatch && descriptionMatch?.groups?.wiId) {
-      const octokit = new github.GitHub(github_token);
-      octokit.issues.createComment({
-        ...context.repo,
-        issue_number: pull_request_number,
-        body: makeLink(organization, project, descriptionMatch?.groups?.wiId)
-      });
+      link = makeLink(organization, project, descriptionMatch?.groups?.wiId);
     }
 
+    if (link != null) {
+
+      if (outputOnly) {
+        core.setOutput('workItemLink', link);
+      }
+      else {
+        const octokit = new github.GitHub(github_token);
+        octokit.issues.createComment({
+          ...context.repo,
+          issue_number: pull_request_number,
+          body: link
+        });
+      }
+    }
 
   } catch (error) {
     core.setFailed(error.message);
