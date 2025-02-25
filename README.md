@@ -20,10 +20,10 @@ on:
 ```yaml
 - name: Get azdo wi link step
   uses: solidify/github-action-azdo-link@master
-        with:
-          organization: 'Org Name'
-          projectName: 'Team Project Name'
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  with:
+      organization: 'Org Name'
+      projectName: 'Team Project Name'
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
 
 ### Only get link in output do not place comment
@@ -32,14 +32,14 @@ on:
   id: devopslink
   uses: solidify/github-action-azdo-link@master
   with:
-          output_only: true
-          organization: 'Org Name'          
-          projectName: 'Team Project Name'
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      output_only: true
+      organization: 'Org Name'          
+      projectName: 'Team Project Name'
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 - name: message
   uses: thollander/actions-comment-pull-request@v3
-      with:
-        message: Your link is here (workitem link)[${{ steps.devopslink.outputs.workItemLink }}]
+  with:
+      message: Your link is here (workitem link)[${{ steps.devopslink.outputs.workItemLink }}]
 ```
 
 
