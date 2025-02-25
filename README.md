@@ -32,7 +32,7 @@ on:
   id: devopslink
   uses: solidify/github-action-azdo-link@master
   with:
-      output_only: true
+      outputOnly: true
       organization: 'Org Name'          
       projectName: 'Team Project Name'
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
