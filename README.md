@@ -28,8 +28,8 @@ on:
 
 ### Only get link in output do not place comment
 ```yaml
-- name: Get azdo wi link step
-  id: 
+- name: Get devops link step
+  id: devopslink
   uses: solidify/github-action-azdo-link@master
   with:
           output_only: true
