@@ -39,7 +39,7 @@ on:
 - name: message
   uses: thollander/actions-comment-pull-request@v3
       with:
-        message: Cannot approve this PR if the website is not built or no devops item is linked.
+        message: Your link is here (workitem link)[${{ steps.devopslink.outputs.workItemLink }}]
 ```
 
 
