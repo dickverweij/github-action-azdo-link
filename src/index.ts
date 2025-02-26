@@ -20,8 +20,12 @@ const main = async () => {
     const outputOnly = core.getBooleanInput("outputOnly");
     const titleMatch = workItemLinkRegEx.exec(github.context.payload.pull_request.title);
     const descriptionMatch = workItemLinkRegEx.exec(github.context.payload.pull_request.body);
+<<<<<<< HEAD
     
     console.log(titleMatch, descriptionMatch, outputOnly);
+=======
+    console.log(titleMatch, descriptionMatch,outputOnly);
+>>>>>>> 7b387ab (fix build)
     console.log('Title has work item:', workItemLinkRegEx.test(github.context.payload.pull_request ? github.context.payload.pull_request.title : ""))
     console.log('Description has work item:', workItemLinkRegEx.test(github.context.payload.pull_request ? github.context.payload.pull_request.body : ""))
 
